@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :cart, only: [:show, :destroy]
   resources :users, only: [:new, :create]
   resource :session
   resources :passwords, param: :token
