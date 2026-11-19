@@ -14,10 +14,22 @@
       <%= button_to "Empty cart", cart_path, method: :delete, class: "rounded-md px-3.5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white block font-medium" %>
 
       <% @cart.cart_items.each do |cart_item| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <div class="w-full sm:w-auto my-5 space-y-5">
-            <%= cart_item.drink.name %>
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 py-5">
+          <div class="w-full sm:w-auto">
+            <p class="font-bold text-lg">
+              <%= cart_item.drink.name %>
+            </p>
+            <p class="text-gray-500">
+              CHF <%= cart_item.drink.price %>
+            </p>
           </div>
+
+          <%= form_with url: update_cart_path(cart_item.drink), method: :put, class: "flex items-center gap-3" do |form| %>
+            <%= form.label :quantity, "Quantity", class: "font-medium" %>
+            <%= form.number_field :quantity, value: cart_item.quantity, min: 1, step: 1, onchange: "this.form.requestSubmit()", class: "w-20 rounded-md border border-gray-400 px-3 py-2 text-center" %>
+          <% end %>
+
+          <%= button_to "Remove", remove_cart_path(cart_item.drink), method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer" %>
         </div>
       <% end %>
     <% else %>

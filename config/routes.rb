@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'drinks#index'
-  resource :cart, only: [:show, :destroy]
+  resource :cart, only: [:show, :destroy] do
+    put ':drink_id', action: :update, as: :update
+    patch ':drink_id', action: :add, as: :add
+    delete ':drink_id', action: :remove, as: :remove
+  end
   resources :users, only: [:new, :create]
   resource :session
   resources :passwords, param: :token
