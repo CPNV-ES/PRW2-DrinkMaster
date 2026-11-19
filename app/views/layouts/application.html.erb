@@ -23,6 +23,17 @@
   </head>
 
   <body>
+    <nav class="flex justify-end items-center gap-4 p-5 bg-gray-200">
+      <% if authenticated? %>
+        <%= link_to "Cart", cart_path, class: "rounded-md px-3.5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-medium" %>
+        <%= link_to "Drinks", drinks_path, class: "rounded-md px-3.5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-medium" %>
+
+        <%= button_to "Logout", session_path, method: :delete, class: "rounded-md px-3.5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium" %>
+      <% else %>
+        <%= link_to "Sign in", new_session_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium" %>
+        <%= link_to "Register", new_user_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium" %>
+      <% end %>
+    </nav>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

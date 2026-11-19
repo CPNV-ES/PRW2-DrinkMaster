@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'drinks#index'
   resource :cart, only: [:show, :destroy]
   resources :users, only: [:new, :create]
   resource :session

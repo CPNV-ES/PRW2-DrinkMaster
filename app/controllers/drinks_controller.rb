@@ -1,5 +1,6 @@
 class DrinksController < ApplicationController
   before_action :set_drink, only: %i[ show edit update destroy ]
+  allow_unauthenticated_access only: [:index, :show]
 
   # GET /drinks
   def index
